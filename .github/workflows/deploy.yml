@@ -28,12 +28,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Pages가 꺼져 있으면 이 스텝에서 자동으로 켠다 (workflow 소스)
-      - name: Enable Pages (auto)
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
+      # 참고: Pages 자동 활성화(enablement)는 기본 GITHUB_TOKEN 권한으로는 불가라
+      # Settings > Pages > Source = "GitHub Actions"는 저장소에서 한 번 수동 설정해야 함
       - name: Run tests
         run: npm test
 
