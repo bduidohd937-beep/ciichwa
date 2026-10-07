@@ -1,4 +1,5 @@
 import { CHARACTERS, type CharacterId } from '../data/characters'
+import { playSfx } from '../audio'
 import CharacterArt from './CharacterArt'
 
 interface Props {
@@ -47,7 +48,10 @@ export default function Landing({ onStart, resumable }: Props) {
 
       <button
         type="button"
-        onClick={onStart}
+        onClick={() => {
+          playSfx('chime')
+          onStart()
+        }}
         className="mt-8 rounded-full bg-ink px-10 py-4 font-display text-xl text-cream shadow-[0_6px_0_0_rgba(62,58,54,0.25)] transition-transform hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none"
       >
         {resumable ? '이어서 테스트하기' : '테스트 시작하기'}

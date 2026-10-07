@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { playSfx, unlockAudio } from './audio'
 import Landing from './components/Landing'
+import MuteButton from './components/MuteButton'
 import Quiz from './components/Quiz'
 import Result from './components/Result'
 import { QUESTIONS } from './data/questions'
@@ -71,6 +73,17 @@ export default function App() {
     if (screen === 'quiz') saveProgress(progress)
   }, [progress, screen])
 
+  // 첫 상호작용에서 BGM 시작 (자동재생 정책 대응)
+  useEffect(() => {
+    const unlock = () => unlockAudio()
+    window.addEventListener('pointerdown', unlock, { once: true })
+    window.addEventListener('keydown', unlock, { once: true })
+    return () => {
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('keydown', unlock)
+    }
+  }, [])
+
   const start = () => {
     const saved = loadProgress()
     if (saved) setProgress(saved)
@@ -107,6 +120,7 @@ export default function App() {
       setResult(r)
       clearProgress()
       setScreen('result')
+      playSfx('fanfare')
       window.scrollTo({ top: 0 })
     } catch {
       /* 계산 실패 시 질문 화면 유지 */
@@ -115,6 +129,7 @@ export default function App() {
   }
 
   const restart = () => {
+    playSfx('pop')
     clearProgress()
     setResult(null)
     setProgress({ answers: Array(QUESTIONS.length).fill(-1), index: 0 })
@@ -126,14 +141,10 @@ export default function App() {
     window.scrollTo({ top: 0 })
   }
 
-  if (screen === 'result' && result) {
-    return (
+  const view =
+    screen === 'result' && result ? (
       <Result result={result} shared={shared !== null} onRestart={restart} />
-    )
-  }
-
-  if (screen === 'quiz') {
-    return (
+    ) : screen === 'quiz' ? (
       <Quiz
         answers={progress.answers}
         index={progress.index}
@@ -141,8 +152,14 @@ export default function App() {
         onBack={back}
         onFinish={finish}
       />
+    ) : (
+      <Landing onStart={start} resumable={resumable} />
     )
-  }
 
-  return <Landing onStart={start} resumable={resumable} />
+  return (
+    <>
+      {view}
+      <MuteButton />
+    </>
+  )
 }

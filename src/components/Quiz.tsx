@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { QUESTIONS, type Axis } from '../data/questions'
+import { playSfx } from '../audio'
 import type { Answers } from '../engine/scoring'
 
 interface Props {
@@ -44,6 +45,7 @@ export default function Quiz({
 
   const handlePick = (optionIndex: number) => {
     if (locked) return
+    playSfx('pop')
     setSelected(optionIndex)
     setLocked(true)
     const isLast = index === total - 1

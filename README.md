@@ -17,6 +17,8 @@ MBTI 4축(외향/내향·감각/직관·사고/감정·판단/인식)을 **16문
 - 💞 **케미 추천** — 결과 캐릭터와 잘 맞는 친구 2명
 - 🖼 **결과 카드 PNG 다운로드** — 초상(PNG/SVG)→캔버스 렌더링으로 SNS 공유용 이미지 생성
 - 🎞 **캐릭터 모션** — 미세 바운스·눈 깜빡임 애니메이션, 호버 시 점프 (reduced-motion 대응)
+- 🔊 **효과음 & BGM** — 선택·확인·결과 팬파레 효과음과 루프 BGM. 첫 클릭에서 시작하고
+  우하단 버튼으로 음소거(저장됨). 에셋은 `scripts/generate_audio.py`로 재생성
 - 🔗 **공유 링크** — `?r=INFP` 같은 결과 URL 복사 (축 점수 포함 시 그래프까지 복원)
 - 💾 **진행 저장** — 새로고침/뒤로가기에도 세션 유지
 - 📱 **모바일 대응** · 접근성(키보드 조작, 텍스트 대비, reduced-motion 대응)
@@ -35,6 +37,10 @@ npm run build    # tsc -b + vite build → dist/
 npm run preview  # 빌드 산출물 미리보기
 ```
 
+```bash
+python scripts/generate_audio.py   # public/audio/*.wav 효과음·BGM 재생성 (numpy)
+```
+
 ## 🗂 구조
 
 ```
@@ -48,8 +54,10 @@ src/
 ├─ components/
 │  ├─ CharacterArt.tsx  # 캐릭터 초상 PNG(7종) + SVG 폴백
 │  ├─ Landing.tsx       # 랜딩
+│  ├─ MuteButton.tsx    # 소리 켜기/끄기 고정 버튼
 │  ├─ Quiz.tsx          # 질문 화면 (진행바, A/B)
 │  └─ Result.tsx        # 결과 (그래프, 케미, PNG 카드, 공유)
+├─ audio.ts             # 효과음/BGM 재생 · 음소거 설정 저장
 └─ App.tsx              # 화면 전환 · 진행 저장 · 공유 링크 복원
 ```
 
