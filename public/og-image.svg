@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      .title { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-weight: 800; }
+      .sub { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="#FFF6E9" />
+  <rect x="30" y="30" width="1140" height="570" rx="40" fill="#FFFFFF" stroke="#3E3A36" stroke-opacity="0.12" stroke-width="4" />
+
+  <!-- 좌측: 치이카와 미니 일러스트 -->
+  <g transform="translate(150,315)" stroke="#3E3A36" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-64 -62 C-80 -96 -72 -124 -46 -120 C-28 -117 -18 -98 -16 -78" fill="#FFFFFF" />
+    <path d="M64 -62 C80 -96 72 -124 46 -120 C28 -117 18 -98 16 -78" fill="#FFFFFF" />
+    <ellipse cx="0" cy="0" rx="118" ry="110" fill="#FFFFFF" />
+    <circle cx="-36" cy="-14" r="11" fill="#3E3A36" stroke="none" />
+    <circle cx="36" cy="-14" r="11" fill="#3E3A36" stroke="none" />
+    <path d="M-15 24 q15 15 30 0" fill="none" />
+    <ellipse cx="-66" cy="24" rx="19" ry="11" fill="#FFC9BC" stroke="none" />
+    <ellipse cx="66" cy="24" rx="19" ry="11" fill="#FFC9BC" stroke="none" />
+  </g>
+
+  <!-- 우측: 텍스트 -->
+  <text class="sub" x="400" y="230" font-size="46" fill="#7A736B">16문항으로 알아보는</text>
+  <text class="title" x="400" y="330" font-size="86" fill="#3E3A36">나는 어떤 치이카와?</text>
+
+  <!-- 하이라이트 -->
+  <rect x="742" y="264" width="326" height="34" rx="8" fill="#FFD66B" opacity="0.7" />
+
+  <!-- 배지 -->
+  <g>
+    <rect x="400" y="390" rx="26" width="300" height="70" fill="#3E3A36" />
+    <text class="sub" x="550" y="436" font-size="34" fill="#FFF6E9" text-anchor="middle">우사기 · 하치와레 · 치이카와</text>
+  </g>
+
+  <text class="sub" x="400" y="520" font-size="30" fill="#A09890">당신은 어떤 캐릭터와 닮았나요?</text>
+</svg>

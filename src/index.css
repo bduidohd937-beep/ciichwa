@@ -1,0 +1,93 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Jua', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+    sans-serif;
+  --font-sans: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui,
+    sans-serif;
+
+  /* 치이카와 파스텔 팔레트 */
+  --color-cream: #fff6e9;
+  --color-cream-dark: #fdebd2;
+  --color-ink: #3e3a36;
+  --color-ink-soft: #7a736b;
+  --color-sky: #7ec8f0;
+  --color-honey: #ffd66b;
+  --color-peach: #ffb3a7;
+  --color-mint: #a8e6cf;
+  --color-lilac: #cdb4db;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+/* 부드러운 화면 전환 */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-pop {
+  animation: pop-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: bounce-soft 2.4s ease-in-out infinite;
+}
+
+/* 점수 바 채움 애니메이션 */
+@keyframes bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.bar-fill {
+  transform-origin: left;
+  animation: bar-fill 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop,
+  .animate-float,
+  .bar-fill {
+    animation: none;
+  }
+}
