@@ -46,7 +46,12 @@ export interface Character {
   /** 케미 추천 친구 ids */
   readonly friends: readonly CharacterId[]
   readonly color: { readonly bg: string; readonly accent: string }
+  /** 추출한 PNG 초상 경로 (없으면 SVG 폴백) */
+  readonly image?: string
 }
+
+/** 배경 제거 + 4배 업스케일한 캐릭터 PNG (public/characters/) */
+const art = (file: string) => `${import.meta.env.BASE_URL}characters/${file}.png`
 
 export const CHARACTERS: Record<CharacterId, Character> = {
   chiikawa: {
@@ -62,6 +67,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['다정', '신중', '강운'],
     friends: ['hachiware', 'usagi'],
     color: { bg: '#FFFFFF', accent: '#FF9E8A' },
+    image: art('chiikawa'),
   },
   hachiware: {
     id: 'hachiware',
@@ -76,6 +82,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['분위기 메이커', '낙천적', '응원가'],
     friends: ['chiikawa', 'usagi'],
     color: { bg: '#EAF6FF', accent: '#5FB6E8' },
+    image: art('hachiware'),
   },
   usagi: {
     id: 'usagi',
@@ -90,6 +97,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['자유로움', '행동파', '먹방'],
     friends: ['hachiware', 'chiikawa'],
     color: { bg: '#FFF6DC', accent: '#F5B301' },
+    image: art('usagi'),
   },
   momonga: {
     id: 'momonga',
@@ -104,6 +112,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['관심욕', '애교', '뻔뻔함'],
     friends: ['armor', 'chiikawa'],
     color: { bg: '#FBF1E6', accent: '#D9A06B' },
+    image: art('momonga'),
   },
   rakko: {
     id: 'rakko',
@@ -118,6 +127,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['실력자', '담백', '비장미'],
     friends: ['usagi', 'chiikawa'],
     color: { bg: '#EFF6F0', accent: '#6FAE87' },
+    image: art('rakko'),
   },
   shisa: {
     id: 'shisa',
@@ -132,6 +142,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['성실', '긍정', '실속파'],
     friends: ['kurimanju', 'chiikawa'],
     color: { bg: '#FFF2E0', accent: '#EF9435' },
+    image: art('shisa'),
   },
   kurimanju: {
     id: 'kurimanju',
@@ -146,6 +157,7 @@ export const CHARACTERS: Record<CharacterId, Character> = {
     traits: ['여유', '든든', '선배향'],
     friends: ['shisa', 'chiikawa'],
     color: { bg: '#F6EFE7', accent: '#9C7154' },
+    image: art('kurimanju'),
   },
   armor: {
     id: 'armor',

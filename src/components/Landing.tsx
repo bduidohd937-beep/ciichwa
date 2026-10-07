@@ -77,7 +77,7 @@ export default function Landing({ onStart, resumable }: Props) {
           {ALL_IDS.map((id) => (
             <div
               key={id}
-              className="rounded-2xl border-2 border-ink/10 bg-white p-2 transition-transform hover:-translate-y-1"
+              className="card-hop rounded-2xl border-2 border-ink/10 bg-white p-2 transition-transform hover:-translate-y-1"
               style={{ backgroundColor: CHARACTERS[id].color.bg }}
             >
               <CharacterArt id={id} className="h-auto w-full" />

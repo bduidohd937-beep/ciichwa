@@ -84,10 +84,67 @@ h3,
   animation: bar-fill 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* 캐릭터 SVG 애니메이션: 살짝 둥둥 떠오르는 호흡 */
+@keyframes art-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.art-bob {
+  animation: art-bob 3.2s ease-in-out infinite;
+}
+
+/* 눈 깜빡임 — 눈 그룹(<g class="blink">)이 위아래로 살짝 찡긋 */
+@keyframes art-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+  98% {
+    transform: scaleY(1);
+  }
+}
+
+.blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-blink 4.5s ease-in-out infinite;
+}
+
+/* 카드 안 캐릭터: 호버하면 통통 뛰기 */
+@keyframes art-hop {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-10px) rotate(-4deg);
+  }
+  60% {
+    transform: translateY(0) rotate(3deg);
+  }
+}
+
+.card-hop:hover .art-bob {
+  animation: art-hop 0.5s ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-pop,
   .animate-float,
-  .bar-fill {
+  .bar-fill,
+  .art-bob,
+  .blink,
+  .card-hop:hover .art-bob {
     animation: none;
   }
 }

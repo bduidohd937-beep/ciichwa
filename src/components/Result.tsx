@@ -51,8 +51,10 @@ export default function Result({ result, shared, onRestart }: Props) {
   /** 결과 카드를 PNG로 렌더링해 다운로드 */
   const downloadCard = async () => {
     const wrap = artWrapRef.current
-    const svg = wrap?.querySelector('svg')
-    if (!svg) return
+    if (!wrap) return
+    const img = wrap.querySelector('img')
+    const svg = wrap.querySelector('svg')
+    if (!img && !svg) return
 
     const W = 1080
     const H = 1350
@@ -70,16 +72,36 @@ export default function Result({ result, shared, onRestart }: Props) {
     ctx.roundRect(40, 40, W - 80, H - 80, 48)
     ctx.fill()
 
-    // 캐릭터 SVG → 이미지
-    const svgData = new XMLSerializer().serializeToString(svg)
-    const img = new Image()
-    const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgData)}`
-    await new Promise<void>((resolve, reject) => {
-      img.onload = () => resolve()
-      img.onerror = () => reject(new Error('svg load failed'))
-      img.src = svgUrl
-    })
-    ctx.drawImage(img, W / 2 - 260, 150, 520, 520)
+    // 초상: PNG <img>면 그대로, SVG면 직렬화 후 그림
+    let drawable: CanvasImageSource
+    let dw = 0
+    let dh = 0
+    if (img) {
+      if (!img.complete || img.naturalWidth === 0) {
+        await new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve()
+          img.onerror = () => reject(new Error('img load failed'))
+        })
+      }
+      drawable = img
+      // 세로 520 기준 비율 유지
+      const r = 520 / img.naturalHeight
+      dw = img.naturalWidth * r
+      dh = 520
+    } else {
+      const svgData = new XMLSerializer().serializeToString(svg!)
+      const loaded = new Image()
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgData)}`
+      await new Promise<void>((resolve, reject) => {
+        loaded.onload = () => resolve()
+        loaded.onerror = () => reject(new Error('svg load failed'))
+        loaded.src = svgUrl
+      })
+      drawable = loaded
+      dw = 520
+      dh = 520
+    }
+    ctx.drawImage(drawable, W / 2 - dw / 2, 150 + (520 - dh) / 2, dw, dh)
 
     ctx.textAlign = 'center'
     ctx.fillStyle = '#7A736B'

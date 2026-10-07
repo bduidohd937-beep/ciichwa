@@ -126,9 +126,9 @@ export const QUESTIONS: readonly Question[] = [
     id: 9,
     axis: 'TF',
     weight: 1,
-    prompt: '친구가 내 간식을 없앴을 때?',
+    prompt: '친구의 실수로 간식을 못 먹게 되었을 때, 나는?',
     options: [
-      { text: '왜 그랬는지 이유부터 묻는다', pole: 'T' },
+      { text: '실수가 난 이유부터 확인한다', pole: 'T' },
       { text: '괜찮아, 너가 더 속상할 텐데', pole: 'F' },
     ],
   },
