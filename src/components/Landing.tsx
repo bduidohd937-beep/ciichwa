@@ -41,7 +41,7 @@ export default function Landing({ onStart, resumable }: Props) {
         ?
       </h1>
       <p className="mt-4 max-w-md text-ink-soft">
-        우사기, 하치와레, 치이카와… 16문항으로 알아보는
+        우사기, 하치와레, 치이카와… 12문항으로 알아보는
         <br />
         나와 닮은 치이카와 세계관 캐릭터
       </p>
@@ -70,7 +70,7 @@ export default function Landing({ onStart, resumable }: Props) {
       )}
 
       <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-medium text-ink-soft">
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-ink/10">16문항</span>
+        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-ink/10">12문항</span>
         <span className="rounded-full bg-white px-3 py-1 ring-1 ring-ink/10">4축 성향 분석</span>
         <span className="rounded-full bg-white px-3 py-1 ring-1 ring-ink/10">결과 이미지 공유</span>
       </div>

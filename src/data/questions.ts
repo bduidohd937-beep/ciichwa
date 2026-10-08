@@ -1,8 +1,8 @@
 /**
  * 테스트 문항 데이터
- * - 16문항, 4축(EI/SN/TF/JP)당 4문항
- * - 각 축의 마지막 문항은 weight 2 (동점 방지 — 합계가 항상 홀수가 되어
- *   어느 쪽으로든 한 글자로 확정됨)
+ * - 12문항, 4축(EI/SN/TF/JP)당 3문항
+ * - 각 축 가중치는 1·2·2 (합계 5, 홀수 → ±1±2±2는 0이 될 수 없어
+ *   동점(50%)이 구조적으로 발생하지 않음)
  * - 선택지는 랜덤 순서로 노출되며, 답은 "선택한 성향(pole)"으로 저장된다.
  */
 
@@ -51,7 +51,7 @@ export const QUESTIONS: readonly Question[] = [
   {
     id: 2,
     axis: 'EI',
-    weight: 1,
+    weight: 2,
     prompt: '속이 채워지는 휴식법은?',
     options: [
       { text: '사람들끼리 수다 떨기', pole: 'E' },
@@ -60,16 +60,6 @@ export const QUESTIONS: readonly Question[] = [
   },
   {
     id: 3,
-    axis: 'EI',
-    weight: 1,
-    prompt: '처음 가는 자리에 도착했을 때 나는?',
-    options: [
-      { text: '먼저 다가가 말을 건넨다', pole: 'E' },
-      { text: '분위기부터 파악하고 눈치를 본다', pole: 'I' },
-    ],
-  },
-  {
-    id: 4,
     axis: 'EI',
     weight: 2,
     prompt: '신나는 하루가 끝나면?',
@@ -81,7 +71,7 @@ export const QUESTIONS: readonly Question[] = [
 
   // ── S / N ──────────────────────────────────────────────
   {
-    id: 5,
+    id: 4,
     axis: 'SN',
     weight: 1,
     prompt: '새 간식 매대 앞에 섰을 때 나는?',
@@ -91,19 +81,9 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 6,
+    id: 5,
     axis: 'SN',
-    weight: 1,
-    prompt: '이야기를 들을 때 나는?',
-    options: [
-      { text: '사실과 구체적인 디테일이 중요', pole: 'S' },
-      { text: '그 이면의 의미와 가능성에 끌린다', pole: 'N' },
-    ],
-  },
-  {
-    id: 7,
-    axis: 'SN',
-    weight: 1,
+    weight: 2,
     prompt: '문제가 생겼을 때 나의 스타일은?',
     options: [
       { text: '지금까지 통한 방법부터 적용', pole: 'S' },
@@ -111,7 +91,7 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 8,
+    id: 6,
     axis: 'SN',
     weight: 2,
     prompt: '미래의 나를 상상하면?',
@@ -123,7 +103,7 @@ export const QUESTIONS: readonly Question[] = [
 
   // ── T / F ──────────────────────────────────────────────
   {
-    id: 9,
+    id: 7,
     axis: 'TF',
     weight: 1,
     prompt: '친구의 실수로 간식을 못 먹게 되었을 때, 나는?',
@@ -133,19 +113,9 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 10,
+    id: 8,
     axis: 'TF',
-    weight: 1,
-    prompt: '결정할 때 더 중요한 것은?',
-    options: [
-      { text: '논리와 효율이 맞는가', pole: 'T' },
-      { text: '사람들이 다치지 않는가', pole: 'F' },
-    ],
-  },
-  {
-    id: 11,
-    axis: 'TF',
-    weight: 1,
+    weight: 2,
     prompt: '친구들이 싸우고 있으면?',
     options: [
       { text: '누가 더 맞는지 가르쳐주고 싶어', pole: 'T' },
@@ -153,7 +123,7 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 12,
+    id: 9,
     axis: 'TF',
     weight: 2,
     prompt: '듣기 싫은 충고를 받았을 때?',
@@ -165,7 +135,7 @@ export const QUESTIONS: readonly Question[] = [
 
   // ── J / P ──────────────────────────────────────────────
   {
-    id: 13,
+    id: 10,
     axis: 'JP',
     weight: 1,
     prompt: '여행을 떠날 때 나는?',
@@ -175,19 +145,9 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 14,
+    id: 11,
     axis: 'JP',
-    weight: 1,
-    prompt: '방이 어질러지면?',
-    options: [
-      { text: '바로 치우지 않으면 불편하다', pole: 'J' },
-      { text: '필요할 때 그때 치운다', pole: 'P' },
-    ],
-  },
-  {
-    id: 15,
-    axis: 'JP',
-    weight: 1,
+    weight: 2,
     prompt: '마감이 있는 일 처리 방식은?',
     options: [
       { text: '미리미리 끝내놓는다', pole: 'J' },
@@ -195,7 +155,7 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
-    id: 16,
+    id: 12,
     axis: 'JP',
     weight: 2,
     prompt: '갑자기 계획이 바뀌면?',

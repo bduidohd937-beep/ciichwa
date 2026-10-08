@@ -23,7 +23,7 @@
   </g>
 
   <!-- 우측: 텍스트 -->
-  <text class="sub" x="400" y="230" font-size="46" fill="#7A736B">16문항으로 알아보는</text>
+  <text class="sub" x="400" y="230" font-size="46" fill="#7A736B">12문항으로 알아보는</text>
   <text class="title" x="400" y="330" font-size="86" fill="#3E3A36">나는 어떤 치이카와?</text>
 
   <!-- 하이라이트 -->

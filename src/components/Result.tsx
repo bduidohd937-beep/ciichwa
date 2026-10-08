@@ -285,7 +285,7 @@ export default function Result({ result, shared, onRestart }: Props) {
       // 9) 푸터
       ctx.fillStyle = MUTE
       ctx.font = '500 26px sans-serif'
-      ctx.fillText('나는 어떤 치이카와? · 16문항 성격 테스트', cx, 1284)
+      ctx.fillText('나는 어떤 치이카와? · 12문항 성격 테스트', cx, 1284)
 
       const link = document.createElement('a')
       link.download = `나는-어떤-치이카와-${result.type}.png`

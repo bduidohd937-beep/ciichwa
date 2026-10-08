@@ -14,18 +14,20 @@ const allLeft = QUESTIONS.map(() => 0)
 const allRight = QUESTIONS.map(() => 1)
 
 describe('문항 데이터', () => {
-  it('16문항이 있고 id는 1~16', () => {
-    expect(QUESTIONS).toHaveLength(16)
+  it('12문항이 있고 id는 1~12', () => {
+    expect(QUESTIONS).toHaveLength(12)
     expect(QUESTIONS.map((q) => q.id)).toEqual(
-      Array.from({ length: 16 }, (_, i) => i + 1),
+      Array.from({ length: 12 }, (_, i) => i + 1),
     )
   })
 
-  it('축마다 4문항씩 있고, 각 축에 weight 2 문항이 정확히 1개 있다', () => {
+  it('축마다 3문항씩 있고, 가중치는 1·2·2(합계 5, 홀수)다', () => {
     for (const axis of ['EI', 'SN', 'TF', 'JP'] as const) {
       const qs = QUESTIONS.filter((q) => q.axis === axis)
-      expect(qs).toHaveLength(4)
-      expect(qs.filter((q) => q.weight === 2)).toHaveLength(1)
+      expect(qs).toHaveLength(3)
+      const total = qs.reduce((sum, q) => sum + q.weight, 0)
+      expect(total).toBe(5)
+      expect(total % 2).toBe(1)
     }
   })
 
@@ -52,18 +54,31 @@ describe('채점', () => {
     expect(r.axes.every((a) => a.percent === 0)).toBe(true)
   })
 
-  it('동점(50%)이 발생하지 않는다 — weight 2 덕분', () => {
-    // EI축 예시: 1,2,3번 왼쪽(3점) + 4번 오른쪽(-2점) = +1 → 홀수
+  it('동점(50%)이 발생하지 않는다 — 가중치 합 5(홀수) 덕분', () => {
+    // EI축 가중치 1·2·2: 전부 왼쪽(+5) 중 3번만 오른쪽(-2) → +5-4=+1
     const answers = [...allLeft]
-    answers[3] = 1 // 4번(I) 선택
+    answers[2] = 1 // 3번(I) 선택
     const r = scoreAnswers(answers)
     expect(r.axes[0].percent).toBe(60) // (1+5)/10
     expect(r.axes[0].pole).toBe('E')
   })
 
+  it('모든 답변 조합에서 50% 동점이 발생하지 않는다', () => {
+    // 12문항 → 4096가지 조합 전수 검사
+    for (let mask = 0; mask < 1 << 12; mask++) {
+      const answers = Array.from({ length: 12 }, (_, i) => (mask >> i) & 1)
+      const r = scoreAnswers(answers)
+      for (const a of r.axes) {
+        expect(a.percent).not.toBe(50)
+      }
+    }
+  })
+
   it('답변 개수 검증', () => {
     expect(() => validateAnswers([0, 1])).toThrow(/답변 개수/)
-    expect(() => validateAnswers(Array(16).fill(2))).toThrow(/문항/)
+    expect(() => validateAnswers(Array(16).fill(2))).toThrow(/답변 개수/)
+    expect(() => validateAnswers(Array(11).fill(0))).toThrow(/답변 개수/)
+    expect(() => validateAnswers(Array(12).fill(2))).toThrow(/문항/)
     expect(() => validateAnswers(allLeft)).not.toThrow()
   })
 
